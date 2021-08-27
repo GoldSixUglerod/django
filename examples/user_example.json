@@ -1,0 +1,22 @@
+{
+  "worker": {
+    "boss": "Начальник",
+    "slaves": ["микрочелик 1", "микрочелик 2"],
+    "status": "work",
+    "info": {
+      "name": "Давыдьян Данил",
+      "position": "Junior python developer",
+      "contacts": {
+        "mobile number": "+7(111)111-11-11",
+        "email": "111111@gmail.com",
+        "telegram": "@chocop"
+      }
+    },
+    "work_info": {
+      "tegs_or_smth_idk": ["?", "?", "???"],
+      "metrics": {
+        "some_metric": 0.1
+      }
+    }
+  }
+}
