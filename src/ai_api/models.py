@@ -8,4 +8,3 @@ class Note(models.Model):
 
     def __str__(self):
         return str(self.input_text) + " / " + str(self.times) + " " + str(self.dates)
-
