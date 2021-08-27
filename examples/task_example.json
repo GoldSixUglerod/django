@@ -1,0 +1,11 @@
+{
+  "task": {
+    "description": "some_description",
+    "name": "some_name",
+    "importance": "minor",
+    "difficulty": "medium",
+    "history": ["event_1", "event_2"],
+    "author": "some_user",
+    "executor": "some_user"
+  }
+}
