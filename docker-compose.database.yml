@@ -1,0 +1,17 @@
+# This file uses to set up dev database. Needed for Developing purpose
+version: '3'
+
+services:
+    db:
+        image: postgres:13-alpine
+        volumes:
+            - db:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_DB=atom
+            - POSTGRES_USER=atom
+            - POSTGRES_PASSWORD=atom
+
+volumes:
+    db:

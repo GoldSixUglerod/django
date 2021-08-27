@@ -1,14 +1,21 @@
-.idea/
+tmp
+.idea
+redis_data
+pg_data
 
+# Created by https://www.toptal.com/developers/gitignore/api/python,django,vscode
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,vscode
+
+### Django ###
+*.log
+*.pot
+*.pyc
 __pycache__/
-/nginx/logs/error.log
-/nginx/logs/access.log
-/compose/.env
-.coverage
-.coveragerc
-htmlcov/
-.DS_Store
-
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+.env
 .vscode/
 
 venv/
