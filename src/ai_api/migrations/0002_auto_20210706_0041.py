@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ai_notes_api', '0001_initial'),
+        ('ai_api', '0001_initial'),
     ]
 
     operations = [
