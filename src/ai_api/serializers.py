@@ -9,8 +9,8 @@ from django.db.models import fields
 
 class ActionSerializer(serializers.Serializer):
     name = serializers.CharField()
-    keywords = serializers.ListField(serializers.CharField())
-    keywords_vectorized = serializers.ListField(child=serializers.FloatField())
+    keywords = serializers.ListField(child=serializers.CharField())
+    keywords_vectorized = serializers.ListField(child=serializers.ListField(child=serializers.FloatField()))
     description = serializers.CharField()
 
     def create(self, validated_data):

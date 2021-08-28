@@ -38,7 +38,7 @@ class KeywordsExtractor:
         if not self._initialized:
             self._stop_words = stopwords.words('russian')
             self._n_gram_range = (1, 1)
-            self._model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+            self._model = SentenceTransformer('DeepPavlov/rubert-base-cased-sentence')
             self._top_n = 2
             self._initialized = True
 

@@ -22,8 +22,9 @@ class ActionView(APIView):
             return Response({"error": f"No name passed"})
 
         keywords = KeywordsExtractor().extract(description)
+        print("MMMMM keywords", keywords)
         keywords_vectorized = vectorize_words(keywords)
-        name = "".join(keywords)
+        name = " ".join(keywords)
 
         # Create an object on got data
         action = {
@@ -32,6 +33,7 @@ class ActionView(APIView):
             "keywords_vectorized": keywords_vectorized,
             "description": description
         }
+        print("BBBBB action", action)
 
         serializer = ActionSerializer(data=action)
         if serializer.is_valid(raise_exception=True):
