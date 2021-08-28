@@ -4,4 +4,10 @@ morph = MorphAnalyzer()
 
 
 def add_target(words):
-    return [word + "_" + morph.parse(word[0].tag.POS) for word in words]
+    new_words = []
+    for word in words:
+        parsed_word = morph.parse(word)[0]
+        new_words.append(parsed_word.normal_form + '_' + parsed_word.tag.POS)
+    return new_words
+
+print(add_target(['работой']))
