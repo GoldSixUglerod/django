@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Employee, Leader
 from .serializers import EmployeeSerializer
-import request
 
 
 class EmployeeView(APIView):
