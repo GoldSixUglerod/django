@@ -7,7 +7,7 @@ services:
         volumes:
             - db:/var/lib/postgresql/data
         ports:
-            - 5432:5432
+            - 7272:5432
         environment:
             - POSTGRES_DB=atom
             - POSTGRES_USER=atom
