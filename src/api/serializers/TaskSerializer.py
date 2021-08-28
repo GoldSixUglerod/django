@@ -4,7 +4,6 @@ from ..models import Task
 
 
 class TaskSerializer(serializers.Serializer):
-    id = serializers.IntegerField(label='ID')
     name = serializers.CharField(max_length=50, allow_blank=True, default="")
     description = serializers.CharField(max_length=1000, allow_null=False, allow_blank=False)
     list_targets = serializers.ListField(child=serializers.CharField(max_length=50), default=list)
