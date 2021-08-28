@@ -23,7 +23,7 @@ class Employee(models.Model):
     age = models.PositiveIntegerField(null=True, blank=True)
     main = models.BooleanField(default=False)
 
-    action = models.ForeignKey(Action, on_delete=models.PROTECT, related_name="employee")
+    action = models.ManyToManyField(Action)
 
     telegram = models.CharField(max_length=256, null=True, blank=True)
     phone_number = PhoneNumberField(
