@@ -10,9 +10,9 @@ from ..models import Employee, Leader, Department, Task
 
 
 class TaskView(APIView):
-    def get(self, request, pk):
+    def get(self, request):
         tasks = Task.objects.all()
-        serializer = TaskSerializer(tasks)
+        serializer = TaskSerializer(tasks, many=True)
         return Response({"tasks": serializer.data})
 
     def post(self, request):
@@ -21,7 +21,6 @@ class TaskView(APIView):
         end_time_actual = None
         finished = False
         score = None
-
 
         if description is None:
             return Response({"status": "error", "description": "No description passed"})
