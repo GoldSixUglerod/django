@@ -4,6 +4,6 @@ import ai_api
 from . import views
 
 urlpatterns = [
-    path("action/", views.ActionView.as_view()),
-    path("action/<int:pk>", views.ActionView.as_view()),
+    path("task/", views.DepartmentView.as_view()),
+    path("talk/<int:pk>", views.DepartmentView.as_view()),
 ]

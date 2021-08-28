@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Employee, Action
+from ..models import Employee, Department
 
 
 class EmployeeSerializer(serializers.Serializer):
@@ -10,6 +10,6 @@ class EmployeeSerializer(serializers.Serializer):
     status = serializers.CharField()
     age = serializers.IntegerField()
     main = serializers.BooleanField()
-    action = serializers.RelatedField(source='action', many=True)
+    department = serializers.RelatedField(source='department', many=True, queryset=Department.objects.all())
     telegram = serializers.CharField()
     phone_number = serializers.CharField()

@@ -3,16 +3,16 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.models.Action import Action
+from api.models.Department import Department
 from .utils import vectorize_words
 from .utils import KeywordsExtractor
 
 
-class ActionView(APIView):
+class DepartmentView(APIView):
     def get(self, request):
-        actions = Action.objects.all()
-        serializer = ActionSerializer(actions, many=True)
-        return Response({"actions": serializer.data})
+        departments = Department.objects.all()
+        serializer = DeparmentSerializer(departments, many=True)
+        return Response({"departments": serializer.data})
 
     def post(self, request):
         description = request.data.get("description")
@@ -26,18 +26,18 @@ class ActionView(APIView):
         name = " ".join(keywords)
 
         # Create an object on got data
-        action = {
+        department = {
             "name": name,
             "keywords": keywords,
             "keywords_vectorized": keywords_vectorized,
             "description": description
         }
-        print("BBBBB action", action)
+        print("BBBBB action", department)
 
-        serializer = ActionSerializer(data=action)
+        serializer = TaskSerializer(data=action)
         if serializer.is_valid(raise_exception=True):
             saved_note = serializer.save()
-            return Response({"success": f"Action '{saved_note}' created successfully"})
+            return Response({"success": f"Task '{saved_note}' created successfully"})
     #
     # def put(self, request, pk):
     #     saved_note = get_object_or_404(Note.objects.all(), pk=pk)
