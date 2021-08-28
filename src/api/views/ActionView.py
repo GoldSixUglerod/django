@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from ..models import Action
+from ..serializers import ActionSerializer
 
-from api.models.Action import Action
-from .utils import vectorize_words
-from .utils import KeywordsExtractor
+from src.ai_api.utils import vectorize_words
+from src.ai_api.utils import KeywordsExtractor
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 class ActionView(APIView):
