@@ -1,7 +1,7 @@
-from rest_framework import serializers
-
-from .models import Note
-from .utils import DateTimeExtractor
+# from rest_framework import serializers
+#
+# from .models import Note
+# from .utils import DateTimeExtractor
 
 
 # class NoteSerializer(serializers.Serializer):

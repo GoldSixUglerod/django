@@ -1,5 +1,7 @@
 from django.db import models
-from django_postgres_extensions.models.fields import ArrayFields
+from django.contrib.postgres.fields import ArrayField
+
 
 class Task(models.Model):
-    pass
+    description = models.TextField(max_length=1000, null=False, blank=False)
+    list_targets = ArrayField(models.CharField(max_length=50), default=list)

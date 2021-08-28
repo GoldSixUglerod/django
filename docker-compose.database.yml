@@ -12,6 +12,13 @@ services:
             - POSTGRES_DB=atom
             - POSTGRES_USER=atom
             - POSTGRES_PASSWORD=atom
+    adminer:
+        image: adminer
+        restart: always
+        depends_on:
+            - db
+        ports:
+            - "8081:8080"
 
 volumes:
     db:
