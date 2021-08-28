@@ -8,6 +8,7 @@ from ..serializers import DepartmentSerializer
 
 class DepartmentView(APIView):
     def get(self, request):
+        print("AVC")
         departments = Department.objects.all()
         serializer = DepartmentSerializer(departments, many=True)
         return Response({"departments": serializer.data})
