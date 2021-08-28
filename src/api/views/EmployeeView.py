@@ -6,5 +6,5 @@ from ..models import Employee, Leader, Department
 
 
 class EmployeeView(APIView):
-    def get(self, request, pk):
+    def get(self, request, department_pk):
         pass
