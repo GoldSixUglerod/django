@@ -4,9 +4,11 @@ from ..models import Department
 
 
 class DepartmentSerializer(serializers.Serializer):
-    id = serializers.IntegerField(label='ID')
+    id = serializers.IntegerField(label="ID")
     name = serializers.CharField(required=True)
-    keywords = serializers.ListField(child=serializers.CharField(), required=False, default=list)
+    keywords = serializers.ListField(
+        child=serializers.CharField(), required=False, default=list
+    )
     description = serializers.CharField(required=False, default="")
 
     def create(self, validated_data):

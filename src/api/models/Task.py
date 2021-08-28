@@ -1,6 +1,6 @@
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 
 
 class Task(models.Model):
@@ -10,4 +10,6 @@ class Task(models.Model):
     end_time_best = models.DateField()
     end_time_actual = models.DateField()
     finished = models.BooleanField(default=False)
-    score = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    score = models.PositiveIntegerField(
+        default=5, validators=[MinValueValidator(1), MaxValueValidator(100)]
+    )

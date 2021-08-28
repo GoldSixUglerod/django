@@ -19,7 +19,12 @@ class DepartmentView(APIView):
         serializer = DepartmentSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             saved_note = serializer.save()
-            return Response({"status": "success", "description": f"Task '{saved_note}' created successfully"})
+            return Response(
+                {
+                    "status": "success",
+                    "description": f"Task '{saved_note}' created successfully",
+                }
+            )
         return Response({"status": "error", "desription": "Validate error"})
 
     def patch(self, request, pk):
@@ -29,7 +34,12 @@ class DepartmentView(APIView):
         serializer = DepartmentSerializer(instance=saved_note, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             saved_note = serializer.save()
-            return Response({"status": "success", "desciption": f"Note '{saved_note}' updated successfully"})
+            return Response(
+                {
+                    "status": "success",
+                    "desciption": f"Note '{saved_note}' updated successfully",
+                }
+            )
         return Response({"status": "error", "desription": "Validate error"})
 
     def delete(self, request, pk):

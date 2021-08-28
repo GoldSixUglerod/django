@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import PROTECT
 from phonenumber_field.modelfields import PhoneNumberField
@@ -9,9 +8,10 @@ from api.models.enums import UserStatus
 
 class Employee(models.Model):
     user = models.OneToOneField(
-        User,
+        "User",
         on_delete=models.CASCADE,
         null=False,
+        related_name="user",
         primary_key=True,
     )
     status = models.CharField(
@@ -30,3 +30,6 @@ class Employee(models.Model):
     phone_number = PhoneNumberField(
         unique=True, verbose_name="Phone number. Contains region, and number itself"
     )
+
+    class Meta:
+        app_label = 'api'

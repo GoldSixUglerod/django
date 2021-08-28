@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.models.Department import Department
-from .utils import vectorize_words
-from .utils import KeywordsExtractor
+
+from .utils import KeywordsExtractor, vectorize_words
 
 
 class DepartmentView(APIView):
@@ -30,7 +30,7 @@ class DepartmentView(APIView):
             "name": name,
             "keywords": keywords,
             "keywords_vectorized": keywords_vectorized,
-            "description": description
+            "description": description,
         }
         print("BBBBB action", department)
 
@@ -38,6 +38,7 @@ class DepartmentView(APIView):
         if serializer.is_valid(raise_exception=True):
             saved_note = serializer.save()
             return Response({"success": f"Task '{saved_note}' created successfully"})
+
     #
     # def put(self, request, pk):
     #     saved_note = get_object_or_404(Note.objects.all(), pk=pk)
