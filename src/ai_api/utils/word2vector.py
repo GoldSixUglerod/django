@@ -1,6 +1,8 @@
 import zipfile
 import gensim
 from pymorphy2 import MorphAnalyzer
+from dotenv import find_dotenv, load_dotenv
+import os
 
 
 morph = MorphAnalyzer()
@@ -15,7 +17,8 @@ def add_target(words):
 
 
 def download_model():
-    with zipfile.ZipFile('model.zip', 'r') as archive:
+    load_dotenv(find_dotenv())
+    with zipfile.ZipFile(os.getenv('ABS_PATH_TO_MODEL') or 'model.zip', 'r') as archive:
         stream = archive.open('model.bin')
         model = gensim.models.KeyedVectors.load_word2vec_format(stream, binary=True)
     return model
