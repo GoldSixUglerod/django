@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import PROTECT
+
+from api.models import Employee
 
 
 class Task(models.Model):
@@ -11,3 +14,4 @@ class Task(models.Model):
     end_time_actual = models.DateField(null=True)
     finished = models.BooleanField(default=False)
     score = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(100)], null=True)
+    employee = models.ForeignKey(Employee, on_delete=PROTECT)
