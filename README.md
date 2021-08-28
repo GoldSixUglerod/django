@@ -15,4 +15,4 @@ poetry install
 docker-compose -f docker-compose.database.yml up -d
 ```
 
-Store model in root directory. (in djangoApi)
+Store model in project root directory and name it 'model.zip'. (in djangoApi)
