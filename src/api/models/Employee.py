@@ -28,5 +28,5 @@ class Employee(models.Model):
 
     telegram = models.CharField(max_length=256, null=True, blank=True)
     phone_number = PhoneNumberField(
-        unique=True, verbose_name="Phone number. Contains region, and number itself"
+        unique=True, verbose_name="Phone number. Contains region, and number itself", null=True
     )
