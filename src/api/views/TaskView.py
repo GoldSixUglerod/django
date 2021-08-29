@@ -7,8 +7,11 @@ from datetime import date, timedelta
 
 from ai_api.utils import KeywordsExtractor, vectorize_words
 from ..models import Employee, Leader, Department, Task
-from ai_api.utils import download_model
+from ai_api import utils
 from config import DEFAULT_DEPARTMENT_CHOOSE_THRESHOLD
+
+
+w2v_model = utils.download_model()
 
 
 class TaskView(APIView):
@@ -109,20 +112,27 @@ class TaskView(APIView):
         return Response({"success": f"Task with id \"{pk}\" has been deleted."})
 
     def get_department_confidences(self, keywords, kw_confidences):
-        w2v_model = download_model()
         sum_squared_words_confses = sum([conf ** 2 for conf in kw_confidences])
         words_normalized_coefficients = [conf ** 2 / sum_squared_words_confses for conf in kw_confidences]
         departments = Department.objects.all()
         department_confidences = []
+        extracted_target = [tg.replace("ё", "е") for tg in utils.word2vector.add_target(keywords)]
         for department in departments:
             dep_conf = 0
+            employees_target = [tg.replace("ё", "е") for tg in utils.word2vector.add_target(department.list_targets)]
             for task_word_index in range(len(keywords)):
-                task_word = keywords[task_word_index]
+                task_word = extracted_target[task_word_index]
                 max_similarity = 0
-                for dep_word in department.list_targets:
-                    similarity = w2v_model.similarity(task_word, dep_word)
+                for dep_word in employees_target:
+                    similarity = 0
+                    try:
+                        similarity = w2v_model.similarity(task_word, dep_word)
+                    except KeyError:
+                        print("KeyError")
+                        pass
                     if similarity > max_similarity:
                         max_similarity = similarity
+                    print(utils.word2vector.add_target([task_word])[0], utils.word2vector.add_target([dep_word])[0], similarity)
                 dep_conf += max_similarity * words_normalized_coefficients[task_word_index]
             department_confidences.append(dep_conf)
         return department_confidences, departments

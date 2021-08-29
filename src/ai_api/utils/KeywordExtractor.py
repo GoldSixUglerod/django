@@ -2,6 +2,17 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+import ssl
+import nltk
+
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+nltk.download('stopwords')
 
 
 class KeywordsExtractor:
@@ -14,10 +25,10 @@ class KeywordsExtractor:
 
     def __init__(self):
         if not self._initialized:
-            self._stop_words = stopwords.words('russian')
+            self._stop_words = nltk.corpus.stopwords.words('russian')
             self._n_gram_range = (1, 1)
             self._model = SentenceTransformer('DeepPavlov/rubert-base-cased-sentence')
-            self._top_n = 2
+            self._top_n = 5
             self._initialized = True
 
     def extract(self, text):

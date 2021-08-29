@@ -3,7 +3,16 @@ import gensim
 from pymorphy2 import MorphAnalyzer
 from dotenv import find_dotenv, load_dotenv
 import os
+import ssl
+import nltk
 
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+nltk.download('stopwords')
 
 morph = MorphAnalyzer()
 
@@ -21,7 +30,7 @@ def download_model():
     with zipfile.ZipFile(os.getenv('ABS_PATH_TO_MODEL') or 'model.zip', 'r') as archive:
         stream = archive.open('model.bin')
         model = gensim.models.KeyedVectors.load_word2vec_format(stream, binary=True)
-    return model
+        return model
 
 
 def vectorize_word(word, model):
