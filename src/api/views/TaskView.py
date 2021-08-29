@@ -5,13 +5,8 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-<<<<<<< HEAD
-from ai_api.utils import KeywordsExtractor, vectorize_words
-from ..models import Employee, Leader, Department, Task
+from ai_api.utils import KeywordsExtractor
 from ai_api import utils
-=======
-from ai_api.utils import KeywordsExtractor, download_model, vectorize_words
->>>>>>> 4f0ef54f865cd502093ce88ffddef995758d54eb
 from config import DEFAULT_DEPARTMENT_CHOOSE_THRESHOLD
 
 from ..models import Department, Employee, Leader, Task
@@ -175,14 +170,8 @@ class TaskView(APIView):
                         pass
                     if similarity > max_similarity:
                         max_similarity = similarity
-<<<<<<< HEAD
                     print(utils.word2vector.add_target([task_word])[0], utils.word2vector.add_target([dep_word])[0], similarity)
                 dep_conf += max_similarity * words_normalized_coefficients[task_word_index]
-=======
-                dep_conf += (
-                    max_similarity * words_normalized_coefficients[task_word_index]
-                )
->>>>>>> 4f0ef54f865cd502093ce88ffddef995758d54eb
             department_confidences.append(dep_conf)
         return department_confidences, departments
 
