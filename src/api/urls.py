@@ -18,9 +18,6 @@ urlpatterns = [
     path("auth/login/", views.Auth.as_view({"post": "login"})),
     path("auth/register/", views.Auth.as_view({"post": "register"})),
     path("task/notassignedtask/", views.NotAssignedTask.as_view()),
-<<<<<<< HEAD
     path("employee/get_free_employee/<int:department_id>", views.EmployeeViewGetFree.as_view()),
-=======
     *router.urls,
->>>>>>> 085dfee3c6f17ed4074abd21bdf169ff41ac39ac
 ]
