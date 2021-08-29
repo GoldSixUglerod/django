@@ -20,3 +20,17 @@ class DepartmentSerializer(serializers.Serializer):
 
         instance.save()
         return instance
+
+
+class DepartmentReadSerializer(serializers.ModelSerializer):
+    """Serializer for getting department"""
+
+    class Meta:
+        model = Department
+        fields = [
+            "pk",
+            "name",
+            "list_targets",
+            "description",
+        ]
+        read_only_fields = fields

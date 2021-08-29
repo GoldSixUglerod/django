@@ -1,7 +1,8 @@
 from phonenumber_field.serializerfields import PhoneNumberField
-from .DepartmentSerializer import DepartmentSerializer
+from .DepartmentSerializer import DepartmentSerializer, DepartmentReadSerializer
 from rest_framework import serializers
 
+from .user import UserReadSerializer
 from ..models import Department, Employee, User
 
 
@@ -25,8 +26,8 @@ class EmployeeSerializer(serializers.Serializer):
     def create(self, validated_data):
         print(validated_data)
         user = User.objects.create(**{"email": validated_data.get('email'),
-                               "last_name": validated_data.get('last_name'),
-                               "first_name": validated_data.get('first_name')})
+                                      "last_name": validated_data.get('last_name'),
+                                      "first_name": validated_data.get('first_name')})
         validated_data.pop('last_name')
         validated_data.pop('first_name')
         validated_data.pop('email')
@@ -35,3 +36,25 @@ class EmployeeSerializer(serializers.Serializer):
         validated_data['user_id'] = user.id
 
         return Employee.objects.create(**validated_data)
+
+
+class EmployeeReadSerializer(serializers.ModelSerializer):
+    """Serializer for getting employee"""
+
+    user = UserReadSerializer(read_only=True)
+    department = DepartmentReadSerializer(read_only=True)
+
+    class Meta:
+        model = Employee
+        fields = [
+            "pk",
+            "user",
+            "status",
+            "age",
+            "main",
+            "department",
+            "telegram",
+            "phone_number",
+        ]
+        read_only_fields = fields
+        prefetch_related = ("user", "department",)
