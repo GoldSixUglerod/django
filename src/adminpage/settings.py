@@ -29,12 +29,7 @@ SECRET_KEY = "django-insecure-5ndrc_z%8bt@x$i-#e6xc_m+#f9!q0mtx7a(6sawv+8qg$qht^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "*"]
-
-=======
 ALLOWED_HOSTS = ["0.0.0.0", "*"]
->>>>>>> 0669e83b9e73d1a03fdd1beaa6a4a5a953025363
 
 def compose_base_url(schema, hostname, port) -> str:
     base_url = f"{schema}://{hostname}"
