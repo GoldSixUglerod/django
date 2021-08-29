@@ -2,12 +2,12 @@ import requests
 
 URL = "http://0.0.0.0:8000/api/task/"
 
-input_text = "Потушить пожар. Рядом с реактором №4 произошло возгарание урана в бачке мусора. Сотрудники эвакуированы. Необходимо потушить пожар и провести спасательные операции."
-print(f"POST input text: {input_text}")
-response = requests.post(URL, json={"description": input_text})
-print(response)
-json = response.json()
-print("Response:", json)
+# input_text = "Потушить пожар. Рядом с реактором №4 произошло возгарание урана в бачке мусора. Сотрудники эвакуированы. Необходимо потушить пожар и провести спасательные операции."
+# print(f"POST input text: {input_text}")
+# response = requests.post(URL, json={"description": input_text})
+# print(response)
+# json = response.json()
+# print("Response:", json)
 
 #
 # print(f"GET")
@@ -24,3 +24,10 @@ print("Response:", json)
 # response = requests.get(URL)
 # json = response.json()
 # print("Response:", json)
+
+response = requests.patch(URL, json={
+            "employee_id": 8
+        })
+print(response)
+json = response.json()
+print("Response:", json)

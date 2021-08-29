@@ -18,11 +18,12 @@ class TaskSerializer(serializers.Serializer):
     score = serializers.IntegerField(
         default=5, min_value=1, max_value=10, allow_null=True
     )
-    employee_id = serializers.IntegerField(required=False)
+    employee_id = serializers.IntegerField(required=False, allow_null=True)
 
     def create(self, validated_data):
-        print(validated_data)
-        return Task.objects.create(**validated_data)
+        task = Task.objects.create(**validated_data)
+
+        return task
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
