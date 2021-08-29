@@ -5,16 +5,20 @@ from rest_framework.views import APIView
 from ..serializers import EmployeeSerializer
 from ..models import Employee, Leader, Department
 
+from ..models import Department, Employee, Leader
+
 
 class EmployeeView(APIView):
     def get(self, request, department_pk):
         res = {}
         employees = Employee.objects.filter(department_id=department_pk)
         root = employees.get(main=True)
+
         res['name'] = root.user.username
         res['attributes'] = root.to_json()
         res['children'] = []
         children_id = Leader.objects.filter(leader_id=root.pk)
+
         if children_id.count() > 0:
             DFS(res, children_id, employees)
         print(res)

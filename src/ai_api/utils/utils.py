@@ -1,11 +1,14 @@
-import nltk
 import ssl
-from .word2vector import vectorize_word
+
+import nltk
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import CountVectorizer
 from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
 from adminpage.loader import model
+
+from .word2vector import vectorize_word
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -13,7 +16,7 @@ except AttributeError:
     pass
 else:
     ssl._create_default_https_context = _create_unverified_https_context
-nltk.download('stopwords')
+nltk.download("stopwords")
 
 
 def vectorize_words(words_array):

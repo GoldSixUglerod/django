@@ -9,4 +9,6 @@ urlpatterns = [
     path("employee/<int:department_pk>", views.EmployeeView.as_view()),
     path("task/", views.TaskView.as_view()),
     path("task/<int:pk>", views.TaskView.as_view()),
+    path("auth/login/", views.Auth.as_view({"post": "login"})),
+    path("auth/register/", views.Auth.as_view({"post": "register"})),
 ]

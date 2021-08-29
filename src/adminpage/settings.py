@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-5ndrc_z%8bt@x$i-#e6xc_m+#f9!q0mtx7a(6sawv+8qg$qht^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0"]
+ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
 
 
 def compose_base_url(schema, hostname, port) -> str:
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "api",
     "ai_api",
 ]
@@ -117,6 +118,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "api.User"
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "user.services.auth.UserAuth",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

@@ -2,19 +2,18 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from ai_api.utils import download_model
+
 from adminpage import loader
+from ai_api.utils import download_model
 from ai_api.utils.word2vector import vectorize_word
 
 
 def main():
     """Run administrative tasks."""
-    if sys.argv:
-        if len(sys.argv) >= 1:
-            if sys.argv[1] == 'runserver':
-                loader.model = download_model()
-
-
+    # if sys.argv:
+    #     if len(sys.argv) >= 1:
+    #         if sys.argv[1] == 'runserver':
+    #             loader.model = download_model()
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "adminpage.settings")
     try:
