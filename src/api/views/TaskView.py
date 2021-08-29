@@ -59,7 +59,7 @@ class TaskView(APIView):
             "end_time_actual": end_time_actual,
             "finished": finished,
             "score": score,
-            "employee": None,
+            "employee_id": None,
         }
         department_confidences, departments = self.get_department_confidences(
             list_targets, confidences
@@ -90,7 +90,7 @@ class TaskView(APIView):
             department=choosen_department, status="active"
         )
         serializer = TaskSerializer(data=data)
-        if len(employees):
+        if len(employees) == 0:
             if serializer.is_valid(raise_exception=True):
                 saved_note = serializer.save()
             return Response(
@@ -112,9 +112,9 @@ class TaskView(APIView):
                 emp_score = sum([task.score for task in done_tasks]) / len(done_tasks)
             emp_busyness = tasks_required_time / (emp_score ** 0.5)
             employees_busyness.append(emp_busyness)
-        chosen_employee = employees[employees.index(min(employees_busyness))]
+        chosen_employee = employees[employees_busyness.index(min(employees_busyness))]
 
-        data["employee"] = chosen_employee
+        data["employee_id"] = chosen_employee.user_id
 
         serializer = TaskSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
