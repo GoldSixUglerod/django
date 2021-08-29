@@ -37,10 +37,7 @@ class EmployeeView(APIView):
             if not employee:
                 return Response({"status": "error","description": "No such user"})
 
-
         return Response(employee.get_json())
-
-
 
 
     def post(self, request):
