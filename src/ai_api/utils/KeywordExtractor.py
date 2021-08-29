@@ -1,5 +1,3 @@
-import nltk
-import ssl
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from sentence_transformers import SentenceTransformer
