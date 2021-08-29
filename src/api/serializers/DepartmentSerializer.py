@@ -13,7 +13,7 @@ class DepartmentSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
-        instance.list_targets = validated_data.get("list_targets", instance.list_targets)
+        instance.keywords = validated_data.get("keywords", instance.keywords)
         instance.description = validated_data.get("description", instance.description)
 
         instance.save()

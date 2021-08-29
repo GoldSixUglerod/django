@@ -30,4 +30,4 @@ class KeywordsExtractor:
         keywords = [candidates[index] for index in distances.argsort()[0][-self._top_n:]]
         confidences = [distances[0][index] for index in distances.argsort()[0][-self._top_n:]]
 
-        return keywords, confidences
+        return keywords

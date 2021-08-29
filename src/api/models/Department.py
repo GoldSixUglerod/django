@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
 
 from ai_api.utils import KeywordsExtractor
 from api.models import Task
