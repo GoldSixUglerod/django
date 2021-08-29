@@ -5,12 +5,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-<<<<<<< HEAD
-from ai_api.utils import KeywordsExtractor, vectorize_words, download_model
-from ..models import Employee, Leader, Department, Task
-=======
-from ai_api.utils import KeywordsExtractor
->>>>>>> e3cf14cf15d5fc50e5d88f1814933605ff83dd91
+from ai_api.utils import KeywordsExtractor, download_model
 from ai_api import utils
 from config import DEFAULT_DEPARTMENT_CHOOSE_THRESHOLD
 
