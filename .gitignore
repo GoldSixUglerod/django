@@ -17,6 +17,6 @@ db.sqlite3-journal
 media
 .env
 .vscode/
-model.zip
+src/ai_api/utils/model.zip
 
 venv/
