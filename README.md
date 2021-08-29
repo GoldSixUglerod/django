@@ -7,7 +7,7 @@ If you use Linux or MacOs, then run command (if you use Windows, then rename .en
 ```bash
 cp .env.example .env
 ```
-Download model (http://vectors.nlpl.eu/repository/20/185.zip), store it in project root directory (django), and name it 'model.zip' or set path to model in .env
+Download model (http://vectors.nlpl.eu/repository/20/185.zip), store it in project /src/ai_api/utils/ or set path to model in .env, and name it 'model.zip'
 
 Run commands in your terminal:
 ```bash
