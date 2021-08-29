@@ -9,3 +9,4 @@ class Department(models.Model):
 
     def __str__(self):
         return str(self.name)
+git

@@ -30,7 +30,7 @@ class TaskView(APIView):
         if serializer.is_valid(raise_exception=True):
             saved_note = serializer.save()
             return Response({"status": "success", "description": f"Task '{saved_note}' created successfully"})
-        return Response({"status": 'success', 'description': "Validate error"})
+        return Response({"status": 'error', 'description': "Validate error"})
 
     def patch(self, request, pk):
         saved_task = get_object_or_404(Task.objects.all(), pk=pk)

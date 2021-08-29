@@ -28,5 +28,17 @@ class Employee(models.Model):
 
     telegram = models.CharField(max_length=256, null=True, blank=True)
     phone_number = PhoneNumberField(
-        unique=True, verbose_name="Phone number. Contains region, and number itself"
+        unique=True, verbose_name="Phone number. Contains region, and number itself", null=True
     )
+
+    def to_json(self):
+        return {
+            "username": self.user.username,
+            "email": self.user.email,
+            "status": self.status,
+            "age": self.age,
+            "main": self.main,
+            "department": self.department.id,
+            "telegram": self.telegram,
+            "phone_number": self.phone_number
+        }

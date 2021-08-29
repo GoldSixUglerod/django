@@ -32,6 +32,13 @@ DEBUG = True
 ALLOWED_HOSTS = ["0.0.0.0"]
 
 
+def compose_base_url(schema, hostname, port) -> str:
+    base_url = f"{schema}://{hostname}"
+    if port is not None and int(port) != 80:
+        base_url += f":{port}"
+    return base_url
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -123,6 +130,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+SCHEMA = 'http'
+HOSTNAME = os.getenv("POSTGRES_HOST", "localhost")
+PORT = os.getenv("POSTGRES_POST", 80)
+
+BASE_URL = compose_base_url(SCHEMA, HOSTNAME, PORT)
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from phonenumber_field.serializerfields import PhoneNumberField
+from .DepartmentSerializer import DepartmentSerializer
 
 from ..models import Department
 
@@ -11,6 +12,6 @@ class EmployeeSerializer(serializers.Serializer):
     status = serializers.ChoiceField([("active", "User that working"), ("fired", "Fired user"), ("on_holiday", "User on holiday")])
     age = serializers.IntegerField()
     main = serializers.BooleanField()
-    department = serializers.RelatedField(source='department', many=True, queryset=Department.objects.all())
+    department = DepartmentSerializer()
     telegram = serializers.CharField()
     phone_number = PhoneNumberField()
