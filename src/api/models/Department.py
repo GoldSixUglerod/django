@@ -14,16 +14,21 @@ class Department(models.Model):
         return str(self.name)
 
     def generate_targets(self):
-        extractor = KeywordsExtractor()
-        tasks = Task.objects.filter(employee__department=self.pk)
+        extractor = KeywordsExtractor()  # Создается экстрактор
+        tasks = Task.objects.filter(employee__department=self.pk)  # Создается список всех задач департамента
+        # Словарь вида {ключевое слово: количество задач, в которых используется это ключевое слово}
         key_words_for_tasks = {}
+
         for task in tasks:
-            key_words = extractor.extract(task)
+            key_words = extractor.extract(task)  # Извлечение ключевых слов для конкретной задачи из писка задач
             for key_word in key_words:
+                # Добавление ключевого слова в словарь для подсчёта их количества
                 if key_word in key_words_for_tasks:
                     key_words_for_tasks[key_word] += 1
                 else:
                     key_words_for_tasks[key_word] = 0
+
+        # Сортировка ключевых слов по частоте использования и выделение до 5 самых используемых ключевых слов
         self.list_targets = [k for k, v in sorted(key_words_for_tasks.items())][:5]
 
     def save(self, *args, **kwargs):

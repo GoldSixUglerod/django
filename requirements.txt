@@ -77,3 +77,4 @@ urllib3==1.26.6
 vosk==0.3.30
 Werkzeug==2.0.1
 wrapt==1.12.1
+drf_yasg==1.20.0
