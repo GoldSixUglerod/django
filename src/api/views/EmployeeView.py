@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from ..serializers import EmployeeSerializer
 from ..models import Employee, Leader, Department
+import requests
 
 from ..models import Department, Employee, Leader
 
@@ -26,7 +27,6 @@ class EmployeeView(APIView):
 
     def post(self, request):
         data = request.data
-
         serializer = EmployeeSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             saved_employees = serializer.save()
@@ -35,6 +35,10 @@ class EmployeeView(APIView):
 
     def path(self, request):
         pass
+
+
+
+
 
 def DFS(res, children_id, employees):
     for i in range(children_id.count()):
