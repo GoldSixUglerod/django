@@ -47,4 +47,4 @@ class KeywordsExtractor:
             distances[0][index] for index in distances.argsort()[0][-self._top_n:]
         ]
 
-        return keywords
+        return keywords, confidences
