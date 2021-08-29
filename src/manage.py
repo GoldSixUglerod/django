@@ -5,7 +5,6 @@ import sys
 
 from adminpage import loader
 from ai_api.utils import download_model
-from ai_api.utils.word2vector import vectorize_word
 
 
 def main():

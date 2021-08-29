@@ -2,7 +2,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from ai_api.utils import KeywordsExtractor
-from api.models import Task
+from ..models.Task import Task
 
 class Department(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
@@ -19,7 +19,7 @@ class Department(models.Model):
         key_words_for_tasks = {}
 
         for task in tasks:
-            key_words, confidences = extractor.extract(task)  # Извлечение ключевых слов для конкретной задачи из писка задач
+            key_words, confidences = extractor.extract(task.description)  # Извлечение ключевых слов для конкретной задачи из писка задач
             for key_word in key_words:
                 # Добавление ключевого слова в словарь для подсчёта их количества
                 if key_word in key_words_for_tasks:

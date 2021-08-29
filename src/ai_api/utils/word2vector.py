@@ -24,8 +24,3 @@ def download_model():
         stream = archive.open("model.bin")
         model = gensim.models.KeyedVectors.load_word2vec_format(stream, binary=True)
         return model
-
-
-def vectorize_word(word, model):
-    word_with_tag = add_target(word)
-    return model[[word_with_tag]]

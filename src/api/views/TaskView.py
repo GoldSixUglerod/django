@@ -89,7 +89,10 @@ class TaskView(APIView):
         employees = Employee.objects.filter(
             department=choosen_department, status="active"
         )
+        serializer = TaskSerializer(data=data)
         if len(employees):
+            if serializer.is_valid(raise_exception=True):
+                saved_note = serializer.save()
             return Response(
                 {
                     "status": "need action",
@@ -166,11 +169,10 @@ class TaskView(APIView):
                     try:
                         similarity = w2v_model.similarity(task_word, dep_word)
                     except KeyError:
-                        print("KeyError")
                         pass
                     if similarity > max_similarity:
                         max_similarity = similarity
-                    print(utils.word2vector.add_target([task_word])[0], utils.word2vector.add_target([dep_word])[0], similarity)
+                    print(task_word, dep_word, similarity)
                 dep_conf += max_similarity * words_normalized_coefficients[task_word_index]
             department_confidences.append(dep_conf)
         return department_confidences, departments
