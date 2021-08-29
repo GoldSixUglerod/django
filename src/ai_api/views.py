@@ -20,8 +20,7 @@ class DepartmentView(APIView):
         if description is None:
             return Response({"error": f"No name passed"})
 
-        keywords = KeywordsExtractor().extract(description)
-        print("MMMMM keywords", keywords)
+        keywords, confidences = KeywordsExtractor().extract(description)
         keywords_vectorized = vectorize_words(keywords)
         name = " ".join(keywords)
 
@@ -32,7 +31,6 @@ class DepartmentView(APIView):
             "keywords_vectorized": keywords_vectorized,
             "description": description
         }
-        print("BBBBB action", department)
 
         serializer = TaskSerializer(data=action)
         if serializer.is_valid(raise_exception=True):

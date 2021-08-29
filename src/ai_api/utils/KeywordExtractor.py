@@ -30,5 +30,6 @@ class KeywordsExtractor:
         candidate_embeddings = self._model.encode(candidates)
         distances = cosine_similarity(doc_embedding, candidate_embeddings)
         keywords = [candidates[index] for index in distances.argsort()[0][-self._top_n:]]
+        confidences = [distances[0][index] for index in distances.argsort()[0][-self._top_n:]]
 
-        return keywords
+        return keywords, confidences
