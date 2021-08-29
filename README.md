@@ -10,9 +10,8 @@ docker-compose -f docker-compose.server.yml up -d
 For local development:
 ```bash
 cp .env.example .env
-pip install poetry
-poetry install
+pip install -r requirements.txt
 docker-compose -f docker-compose.database.yml up -d
 ```
 
-Store model in project root directory and name it 'model.zip'. (in djangoApi)
+Store model in project root directory and name it 'model.zip'. (in django)
