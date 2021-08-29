@@ -5,6 +5,8 @@ import gensim
 from dotenv import find_dotenv, load_dotenv
 from pymorphy2 import MorphAnalyzer
 
+import os
+
 morph = MorphAnalyzer()
 
 
@@ -21,7 +23,7 @@ def download_model():
     with zipfile.ZipFile(os.getenv("ABS_PATH_TO_MODEL") or "model.zip", "r") as archive:
         stream = archive.open("model.bin")
         model = gensim.models.KeyedVectors.load_word2vec_format(stream, binary=True)
-    return model
+        return model
 
 
 def vectorize_word(word, model):
