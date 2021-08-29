@@ -77,7 +77,7 @@ class TaskView(APIView):
             emp_score = 5
             if len(done_tasks) > 0:
                 emp_score = sum([task.score for task in done_tasks]) / len(done_tasks)
-            emp_busyness = tasks_required_time / emp_score
+            emp_busyness = tasks_required_time / (emp_score**0.5)
             employees_busyness.append(emp_busyness)
         chosen_employee = employees[employees.index(min(employees_busyness))]
 
