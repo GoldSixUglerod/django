@@ -15,4 +15,8 @@ class Task(models.Model):
     score = models.PositiveIntegerField(
         default=5, validators=[MinValueValidator(1), MaxValueValidator(100)], null=True
     )
+    difficulty = models.PositiveIntegerField(
+        default=2, validators=[MinValueValidator(1), MaxValueValidator(3)]
+    )
+    depatment = models.ForeignKey("Department", null=True, on_delete=PROTECT)
     employee = models.ForeignKey("Employee", null=True, on_delete=PROTECT)

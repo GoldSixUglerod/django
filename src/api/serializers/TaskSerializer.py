@@ -18,6 +18,10 @@ class TaskSerializer(serializers.Serializer):
     score = serializers.IntegerField(
         default=5, min_value=1, max_value=10, allow_null=True
     )
+    difficulty = serializers.IntegerField(
+        default=2, min_value=1, max_value=3
+    )
+    department_id = serializers.IntegerField(required=False, allow_null=True)
     employee_id = serializers.IntegerField(required=False, allow_null=True)
 
     def create(self, validated_data):

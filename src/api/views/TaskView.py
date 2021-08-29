@@ -116,7 +116,10 @@ class TaskView(APIView):
             employees_busyness.append(emp_busyness)
         chosen_employee = employees[employees_busyness.index(min(employees_busyness))]
 
-        data["employee_id"] = chosen_employee.user_id
+        if serializer.difficulty <= 2:
+            data["employee_id"] = chosen_employee.user_id
+        else:
+            data['department_id'] = chosen_employee.department_id
 
         serializer = TaskSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
