@@ -20,6 +20,8 @@ class TaskView(APIView):
     def get(self, request):
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many=True)
+        for i in range(tasks.count()):
+            serializer.data[i]['id'] = tasks[i].id
         return Response({"tasks": serializer.data})
 
     def post(self, request):
@@ -59,7 +61,7 @@ class TaskView(APIView):
             "end_time_actual": end_time_actual,
             "finished": finished,
             "score": score,
-            "employee": None,
+            "employee_id": None,
         }
         department_confidences, departments = self.get_department_confidences(
             list_targets, confidences
@@ -90,7 +92,7 @@ class TaskView(APIView):
             department=choosen_department, status="active"
         )
         serializer = TaskSerializer(data=data)
-        if len(employees):
+        if len(employees) == 0:
             if serializer.is_valid(raise_exception=True):
                 saved_note = serializer.save()
             return Response(
@@ -112,14 +114,15 @@ class TaskView(APIView):
                 emp_score = sum([task.score for task in done_tasks]) / len(done_tasks)
             emp_busyness = tasks_required_time / (emp_score ** 0.5)
             employees_busyness.append(emp_busyness)
-        chosen_employee = employees[employees.index(min(employees_busyness))]
+        chosen_employee = employees[employees_busyness.index(min(employees_busyness))]
 
-        data["employee"] = chosen_employee
+        data["employee_id"] = chosen_employee.user_id
 
         serializer = TaskSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             saved_note = serializer.save()
-            return Response({"status": "success", "description": f"Task '{saved_note}' created successfully"})
+            return Response({"status": "success", "description": f"Task '{saved_note}' created successfully",
+                             "user_id": saved_note.employee_id})
         return Response({"status": 'error', 'description': "Validate error"})
 
     def patch(self, request, pk):
