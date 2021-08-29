@@ -30,7 +30,7 @@ keras==2.6.0
 Keras-Preprocessing==1.1.2
 Markdown==3.3.4
 nltk==3.6.2
-numpy==1.19.5
+numpy
 oauthlib==3.1.1
 opt-einsum==3.3.0
 packaging==21.0
@@ -77,3 +77,5 @@ urllib3==1.26.6
 vosk==0.3.30
 Werkzeug==2.0.1
 wrapt==1.12.1
+drf_yasg==1.20.0
+django-cors-headers

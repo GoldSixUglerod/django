@@ -1,10 +1,11 @@
-import nltk
 import ssl
-from .word2vector import vectorize_word
+
+import nltk
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import CountVectorizer
 from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
 from adminpage.loader import model
 
 

@@ -31,6 +31,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["0.0.0.0", "*"]
 
+def compose_base_url(schema, hostname, port) -> str:
+    base_url = f"{schema}://{hostname}"
+    if port is not None and int(port) != 80:
+        base_url += f":{port}"
+    return base_url
+
 
 # Application definition
 
@@ -42,8 +48,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "api",
     "ai_api",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +62,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "adminpage.urls"
@@ -110,6 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "api.User"
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "user.services.auth.UserAuth",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -125,6 +140,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+SCHEMA = 'http'
+HOSTNAME = os.getenv("POSTGRES_HOST", "localhost")
+PORT = os.getenv("POSTGRES_POST", 80)
+
+BASE_URL = compose_base_url(SCHEMA, HOSTNAME, PORT)
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -134,3 +156,5 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CORS_ALLOW_ALL_ORIGINS = True

@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # class Note(models.Model):
 #     input_text = models.TextField()
 #     times = models.TextField()
