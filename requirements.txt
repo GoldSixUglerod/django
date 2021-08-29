@@ -37,7 +37,7 @@ packaging==21.0
 phonenumbers==8.12.31
 Pillow==8.3.1
 protobuf==3.17.3
-psycopg2==2.9.1
+psycopg2-binary
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
@@ -68,11 +68,9 @@ tensorflow-estimator==2.6.0
 termcolor==1.1.0
 threadpoolctl==2.2.0
 tokenizers==0.10.3
-torchvision==0.10.0
 tqdm==4.62.2
 transformers==4.9.2
 typing-extensions==3.7.4.3
-ufal.udpipe==1.2.0.3
 urllib3==1.26.6
 vosk==0.3.30
 Werkzeug==2.0.1
