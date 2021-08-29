@@ -60,7 +60,6 @@ class EmployeeView(APIView):
 
         return Response(employee.get_json())
 
-
     def post(self, request):
         data = request.data
         serializer = EmployeeSerializer(data=data)
@@ -121,3 +120,13 @@ def DFS(res, children_id, employees):
         leaders = Leader.objects.filter(leader_id=tmp_employee.pk)
         if leaders.count() != 0:
             DFS(res['children'][i], leaders, employees)
+
+
+class EmployeeViewGetFree(APIView):
+    def get(self, request, department_id):
+        res = []
+        employees = Employee.objects.filter(department__id=department_id)
+        for employee in employees:
+            if not Task.objects.filter(employee__pk=employee.pk, finished=False).first():
+                res.append({'id': employee.pk, "username": str(employee.user.last_name) + " " + str(employee.user.first_name)})
+        return Response(res)

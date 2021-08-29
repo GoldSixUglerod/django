@@ -13,4 +13,5 @@ urlpatterns = [
     path("auth/login/", views.Auth.as_view({"post": "login"})),
     path("auth/register/", views.Auth.as_view({"post": "register"})),
     path("task/notassignedtask/", views.NotAssignedTask.as_view()),
+    path("employee/get_free_employee/<int:department_id>", views.EmployeeViewGetFree.as_view()),
 ]
