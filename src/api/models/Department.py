@@ -4,7 +4,6 @@ from django.db import models
 from ai_api.utils import KeywordsExtractor
 from api.models import Task
 
-
 class Department(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     list_targets = ArrayField(models.CharField(max_length=50), default=list)
