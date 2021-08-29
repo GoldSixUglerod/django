@@ -8,7 +8,7 @@ from api.models import Task
 class Department(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     list_targets = ArrayField(models.CharField(max_length=50), default=list)
-    description = models.TextField(max_length=1000, null=True, default="")
+    description = models.TextField(max_length=1000, blank=True, default="")
 
     def __str__(self):
         return str(self.name)

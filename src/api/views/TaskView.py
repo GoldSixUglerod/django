@@ -115,7 +115,6 @@ class TaskView(APIView):
             return Response({"status": "success", "description": f"Task '{saved_note}' created successfully"})
         return Response({"status": 'error', 'description': "Validate error"})
 
-
     def patch(self, request, pk):
         saved_task = get_object_or_404(Task.objects.all(), pk=pk)
         data = request.data
@@ -166,3 +165,10 @@ class TaskView(APIView):
                 )
             department_confidences.append(dep_conf)
         return department_confidences, departments
+
+
+class NotAssignedTask(APIView):
+    def get(self, request):
+        tasks = Task.objects.filter(employee=None)
+        serializer = TaskSerializer(tasks, many=True)
+        return Response({"tasks": serializer.data})

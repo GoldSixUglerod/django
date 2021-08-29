@@ -45,3 +45,5 @@ class DepartmentView(APIView):
         note = get_object_or_404(Department.objects.all(), pk=pk)
         note.delete()
         return Response({"success": f"Note with id '{pk}' has been deleted."})
+
+
