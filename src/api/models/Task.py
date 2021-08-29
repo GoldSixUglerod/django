@@ -3,8 +3,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import PROTECT
 
-from api.models import Employee
-
 
 class Task(models.Model):
     name = models.CharField(max_length=50, blank=True, default="")
