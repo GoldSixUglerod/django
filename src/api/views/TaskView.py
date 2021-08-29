@@ -20,6 +20,8 @@ class TaskView(APIView):
     def get(self, request):
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many=True)
+        for i in range(tasks.count()):
+            serializer.data[i]['id'] = tasks[i].id
         return Response({"tasks": serializer.data})
 
     def post(self, request):
@@ -119,7 +121,8 @@ class TaskView(APIView):
         serializer = TaskSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             saved_note = serializer.save()
-            return Response({"status": "success", "description": f"Task '{saved_note}' created successfully"})
+            return Response({"status": "success", "description": f"Task '{saved_note}' created successfully",
+                             "user_id": saved_note.employee_id})
         return Response({"status": 'error', 'description': "Validate error"})
 
     def patch(self, request, pk):
