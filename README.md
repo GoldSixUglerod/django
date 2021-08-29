@@ -1,7 +1,7 @@
 # djangoApi
 
 ### Start project
-You need to use Python 3.8
+You need to use Docker and Python 3.8
 
 If you use Linux or MacOs, then run command (if you use Windows, then rename .env.example to .env):
 ```bash
