@@ -32,6 +32,7 @@ class Employee(models.Model):
 
     def to_json(self):
         return {
+            "id": self.pk,
             "last_name": self.user.last_name,
             "first_name": self.user.first_name,
             "email": self.user.email,
