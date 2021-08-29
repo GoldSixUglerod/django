@@ -11,7 +11,7 @@ class TaskSerializer(serializers.Serializer):
     end_time_actual = serializers.DateField(allow_null=True)
     finished = serializers.BooleanField(default=False)
     score = serializers.IntegerField(default=5, min_value=1, max_value=10, allow_null=True)
-    employee = serializers.RelatedField(source="employee")
+    employee = serializers.RelatedField(source="employee", read_only=True)
 
     def create(self, validated_data):
         return Task.objects.create(**validated_data)

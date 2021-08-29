@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models import PROTECT
 from phonenumber_field.modelfields import PhoneNumberField
 
-from api.models import Department
 from api.models.enums import UserStatus
 
 
@@ -24,7 +23,7 @@ class Employee(models.Model):
     age = models.PositiveIntegerField(null=True, blank=True)
     main = models.BooleanField(default=False)
 
-    department = models.ForeignKey(Department(), on_delete=PROTECT)
+    department = models.ForeignKey('Department', on_delete=PROTECT)
 
     telegram = models.CharField(max_length=256, null=True, blank=True)
     phone_number = PhoneNumberField(
