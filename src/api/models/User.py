@@ -8,6 +8,7 @@ from api.models.managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User model"""
+
     email = models.EmailField(_("Email address"), unique=True)
 
     first_name = models.CharField(

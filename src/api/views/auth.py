@@ -1,12 +1,11 @@
-from api.models.User import User
+from django.contrib.auth.hashers import check_password
 from django.http import JsonResponse
 from rest_framework import serializers, status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.contrib.auth.hashers import check_password
 
-
+from api.models.User import User
 from api.serializers.auth import LoginSerializer, RegistrationSerializer
 
 
@@ -50,7 +49,7 @@ class Auth(
         serializer.is_valid(raise_exception=True)
         try:
             user: User = User.objects.get(email=serializer.validated_data.get("email"))
-            if not check_password(serializer.data['password'], user.password):
+            if not check_password(serializer.data["password"], user.password):
                 raise User.DoesNotExist
             # user: User = user.authenticate(
             #     email=serializer.validated_data.get("email"),
@@ -60,7 +59,8 @@ class Auth(
                 raise User.DoesNotExist
         except User.DoesNotExist:  # If in any state user will be not found - login fails
             return JsonResponse(
-                {"error": "user do not exist or invalid data"}, status=status.HTTP_400_BAD_REQUEST
+                {"error": "user do not exist or invalid data"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
         token, _ = Token.objects.get_or_create(user=user)
         return JsonResponse({"token": token.key}, status=status.HTTP_200_OK)

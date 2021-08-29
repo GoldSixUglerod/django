@@ -5,7 +5,9 @@ from ..models import Department
 
 class DepartmentSerializer(serializers.Serializer):
     name = serializers.CharField(required=True)
-    list_targets = serializers.ListField(child=serializers.CharField(), required=False, default=list)
+    list_targets = serializers.ListField(
+        child=serializers.CharField(), required=False, default=list
+    )
     description = serializers.CharField(required=False, default="")
 
     def create(self, validated_data):
